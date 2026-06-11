@@ -9,6 +9,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import { store } from './app/store';
 import App from './App';
 import './index.css';
@@ -20,8 +21,11 @@ if (!rootElement) {
 
 createRoot(rootElement).render(
   <StrictMode>
+    {/* Provider exposes the Redux store; BrowserRouter enables URL-based routing. */}
     <Provider store={store}>
-      <App />
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <App />
+      </BrowserRouter>
     </Provider>
   </StrictMode>,
 );

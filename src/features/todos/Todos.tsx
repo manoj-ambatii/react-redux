@@ -49,7 +49,7 @@ export function Todos() {
         <button type="submit">Add</button>
       </form>
 
-      <div className="row" role="group" aria-label="filter">
+      <div className="row filter-group" role="group" aria-label="filter">
         {FILTERS.map((filter) => (
           <button
             key={filter}
@@ -77,6 +77,7 @@ export function Todos() {
                 <span>{todo.text}</span>
               </label>
               <button
+                className="delete-btn"
                 onClick={() => dispatch(deleteTodo(todo.id))}
                 aria-label={`delete ${todo.text}`}
               >

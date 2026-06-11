@@ -28,7 +28,7 @@ export function Counter() {
         {value}
       </p>
 
-      <div className="row">
+      <div className="row counter-buttons">
         <button onClick={() => dispatch(decrement())} aria-label="decrement">
           −1
         </button>

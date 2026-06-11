@@ -2,14 +2,16 @@
 
 A small, production-grade reference project showing how to set up
 [Redux Toolkit](https://redux-toolkit.js.org/) with **React 18** and
-**TypeScript** (built with **Vite**). It implements two classic examples:
+**TypeScript** (built with **Vite**). It implements two classic examples behind a simple home screen: pick a demo,
+and you navigate to a dedicated page showing only that feature (real URLs via
+React Router, with a working back button).
 
 - **Counter** — the minimal slice: state, actions, selectors.
 - **Todo list** — a richer slice: list management, a `prepare` callback for id
   generation, a UI filter, and a memoized derived selector.
 
-Every file is heavily commented to explain *why*, not just *what* — it's meant
-to be read.
+The UI is responsive (mobile-first) and supports light/dark mode. Every file is
+heavily commented to explain *why*, not just *what* — it's meant to be read.
 
 ## Tech stack
 
@@ -18,6 +20,7 @@ to be read.
 | Build tool     | Vite 5                                  |
 | UI             | React 18 + TypeScript                   |
 | State          | Redux Toolkit + React-Redux             |
+| Routing        | React Router 6                          |
 | Testing        | Vitest + React Testing Library + jsdom  |
 
 ## Getting started
@@ -38,6 +41,10 @@ src/
   app/
     store.ts            # configureStore + rootReducer; RootState & AppDispatch types
     hooks.ts            # typed useAppSelector / useAppDispatch
+  components/
+    Layout.tsx          # shared header (brand + contextual back link) + <Outlet/>
+  pages/
+    Home.tsx            # landing screen: cards linking to each demo
   features/
     counter/
       counterSlice.ts        # slice: state + reducers + actions
@@ -51,8 +58,9 @@ src/
   test/
     setup.ts            # Vitest setup (jest-dom matchers, cleanup)
     test-utils.tsx      # renderWithProviders helper (real store in tests)
-  App.tsx               # composes the two features
-  main.tsx              # mounts the app inside <Provider store={store}>
+  App.tsx               # route table (/, /counter, /todos)
+  App.test.tsx          # navigation tests (home -> feature -> back)
+  main.tsx              # mounts the app inside <Provider> + <BrowserRouter>
 ```
 
 This is the **feature-folder** structure recommended by the Redux team: each
